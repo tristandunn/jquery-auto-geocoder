@@ -72,15 +72,9 @@
           this.map.set_zoom(options.success.zoom);
           this.map.set_center(results[0].geometry.location);
 
-          if (this.marker) {
-            this.marker.set_position(results[0].geometry.location);
-            this.marker.set_map(this.map);
-          } else {
-            this.marker = new google.maps.Marker({
-              map      : this.map,
-              position : results[0].geometry.location
-            });
-          }
+          this.marker = this.marker || new google.maps.Marker();
+          this.marker.set_position(results[0].geometry.location);
+          this.marker.set_map(this.map);
 
           $(this).trigger('auto-geocoder-onGeocodeSuccess', [results, status]);
         } else {
