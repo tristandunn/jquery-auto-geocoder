@@ -67,33 +67,32 @@
 
     onGeocodeResponse: [function(options) {
       this.bind('auto-geocoder-onGeocodeResult', function(e, results, status) {
-        if (status == google.maps.GeocoderStatus.OK && results.length) {
-          if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-            this.map.set_zoom(options.success.zoom);
-            this.map.set_center(results[0].geometry.location);
+        if (status == google.maps.GeocoderStatus.OK &&
+            status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+          this.map.set_zoom(options.success.zoom);
+          this.map.set_center(results[0].geometry.location);
 
-            if (this.marker) {
-              this.marker.set_position(results[0].geometry.location);
-              this.marker.set_map(this.map);
-            } else {
-              this.marker = new google.maps.Marker({
-                map      : this.map,
-                position : results[0].geometry.location
-              });
-            }
+          if (this.marker) {
+            this.marker.set_position(results[0].geometry.location);
+            this.marker.set_map(this.map);
+          } else {
+            this.marker = new google.maps.Marker({
+              map      : this.map,
+              position : results[0].geometry.location
+            });
           }
 
           $(this).trigger('auto-geocoder-onGeocodeSuccess', [results, status]);
         } else {
+          if (this.marker) {
+            this.marker.set_map(null);
+            delete this.marker;
+          }
+
           this.map.set_zoom(options.initial.zoom);
           this.map.set_center(options.initial.center);
 
           $(this).trigger('auto-geocoder-onGeocodeFailure', [results, status]);
-        }
-
-        if (results.length == 0 && this.marker) {
-          this.marker.set_map(null);
-          delete this.marker;
         }
       });
     }],
