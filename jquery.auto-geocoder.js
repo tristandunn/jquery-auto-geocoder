@@ -26,13 +26,19 @@
 
     createMap: [function(options) {
       this.bind('auto-geocoder-createMap', function() {
-        $(this)
-          .after('<div class="jquery-auto-geocoder-map" />')
-          .keyup(function() {
-            $(this).trigger('auto-geocoder-onKeyUp');
-          });
+        var element = $('<div class="jquery-auto-geocoder-map" />');
 
-        this.map = new google.maps.Map($(this).next()[0], options.initial);
+        if (options.position == 'before' || options.position == 'after') {
+          $(this)[options.position](element);
+        } else {
+          $(options.position).append(element);
+        }
+
+        $(this).keyup(function() {
+          $(this).trigger('auto-geocoder-onKeyUp');
+        });
+
+        this.map = new google.maps.Map(element[0], options.initial);
       });
     }],
 
@@ -97,11 +103,12 @@
   };
 
   $.fn.autoGeocoder.defaults = {
-    delay   : 500,
-    success : {
+    position : 'after',
+    delay    : 500,
+    success  : {
       zoom : 14
     },
-    initial : {
+    initial  : {
       zoom           : 1,
       center         : [34, 0],
       draggable      : false,
