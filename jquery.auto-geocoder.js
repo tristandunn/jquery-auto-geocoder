@@ -44,25 +44,40 @@
 
     onKeyUp: [function(options) {
       this.bind('auto-geocoder-onKeyUp', function() {
-        var self    = $(this);
-        var address = $.trim(self.val());
+        var self    = this;
+        var element = $(this);
+        var address = $.trim(element.val());
 
         if (this.timeout) {
           clearTimeout(this.timeout);
         }
 
+        if (this.previousAddress &&
+            this.previousAddress == cleanAddress(address)) {
+            return;
+        }
+
         if (address == '') {
-          self.trigger('auto-geocoder-onGeocodeResult', [[], '']);
+          element.trigger('auto-geocoder-onGeocodeResult', [[], '']);
 
           return;
         }
 
         this.timeout = setTimeout(function() {
+          self.previousAddress = cleanAddress(address);
+
           geocoder.geocode({ address: address }, function(results, status) {
-            self.trigger('auto-geocoder-onGeocodeResult', [results, status]);
+            element.trigger('auto-geocoder-onGeocodeResult', [results, status]);
           });
         }, options.delay);
-      })
+      });
+
+      function cleanAddress(address) {
+        return address.replace(/\s+/g, ' ')
+                      .replace(/^\s+/, '')
+                      .replace(/\s+$/, '')
+                      .toLowerCase();
+      }
     }],
 
     onGeocodeResponse: [function(options) {
