@@ -84,22 +84,22 @@
       this.bind('auto-geocoder-onGeocodeResult', function(e, results, status) {
         if (status == google.maps.GeocoderStatus.OK &&
             status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-          this.map.set_zoom(options.success.zoom);
-          this.map.set_center(results[0].geometry.location);
+          this.map.setZoom(options.success.zoom);
+          this.map.setCenter(results[0].geometry.location);
 
           this.marker = this.marker || new google.maps.Marker();
-          this.marker.set_position(results[0].geometry.location);
-          this.marker.set_map(this.map);
+          this.marker.setPosition(results[0].geometry.location);
+          this.marker.setMap(this.map);
 
           $(this).trigger('auto-geocoder-onGeocodeSuccess', [results, status]);
         } else {
           if (this.marker) {
-            this.marker.set_map(null);
+            this.marker.setMap(null);
             delete this.marker;
           }
 
-          this.map.set_zoom(options.initial.zoom);
-          this.map.set_center(options.initial.center);
+          this.map.setZoom(options.initial.zoom);
+          this.map.setCenter(options.initial.center);
 
           $(this).trigger('auto-geocoder-onGeocodeFailure', [results, status]);
         }
