@@ -21,6 +21,7 @@
 
       this.bind('auto-geocoder-initialize', function() {
         $(this).trigger('auto-geocoder-createMap');
+        $(this).trigger('auto-geocoder-onKeyUp');
       });
     }],
 
