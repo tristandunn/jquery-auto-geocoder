@@ -46,14 +46,14 @@
       this.bind('auto-geocoder-onKeyUp', function() {
         var self    = this;
         var element = $(this);
-        var address = $.trim(element.val());
+        var address = $.trim(element.val()).replace(/\s+/g, ' ').toLowerCase();
 
         if (this.timeout) {
           clearTimeout(this.timeout);
         }
 
         if (this.previousAddress &&
-            this.previousAddress == cleanAddress(address)) {
+            this.previousAddress == address) {
             return;
         }
 
@@ -64,23 +64,16 @@
         }
 
         this.timeout = setTimeout(function() {
-          self.previousAddress = cleanAddress(address);
+          self.previousAddress = address;
 
           geocoder.geocode({ address: address }, function(results, status) {
             element.trigger('auto-geocoder-onGeocodeResult', [results, status]);
           });
         }, options.delay);
       });
-
-      function cleanAddress(address) {
-        return address.replace(/\s+/g, ' ')
-                      .replace(/^\s+/, '')
-                      .replace(/\s+$/, '')
-                      .toLowerCase();
-      }
     }],
 
-    onGeocodeResponse: [function(options) {
+    onGeocodeResult: [function(options) {
       this.bind('auto-geocoder-onGeocodeResult', function(e, results, status) {
         if (status == google.maps.GeocoderStatus.OK &&
             status != google.maps.GeocoderStatus.ZERO_RESULTS) {
@@ -127,7 +120,7 @@
 
   // From:
   // http://yehudakatz.com/2009/04/20/evented-programming-with-jquery/
-  jQuery.fn.setupExtras = function(setup, options) {
+  jQuery.fn.setupExtras = jQuery.fn.setupExtras || function(setup, options) {
     for (property in setup) {
       var self = this;
 
