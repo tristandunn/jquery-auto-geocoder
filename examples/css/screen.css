@@ -1,0 +1,35 @@
+body,
+input {
+  font-size: 14px;
+  font-family: Helvetica, Arial, Sans-serif;
+}
+
+body {
+  width: 600px;
+  margin: 32px auto;
+}
+
+h1 {
+  margin: 0 0 64px 0;
+  font-size: 48px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: -2px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+}
+
+input {
+  width: 592px;
+  margin: 4px 0;
+  padding: 4px;
+}
+
+.jquery-auto-geocoder-map {
+  width: 504px;
+  height: 300px;
+  border: 50px solid #EEE;
+}
