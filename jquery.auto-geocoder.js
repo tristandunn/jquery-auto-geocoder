@@ -27,7 +27,7 @@
 
     createMap: [function(options) {
       this.bind('auto-geocoder-createMap', function() {
-        var element = $('<div class="jquery-auto-geocoder-map" />');
+        var element = $('<div class="' + options.className + '" />');
 
         if (options.position == 'before' || options.position == 'after') {
           $(this)[options.position](element);
@@ -105,9 +105,10 @@
   };
 
   $.fn.autoGeocoder.defaults = {
-    position : 'after',
-    delay    : 500,
-    success  : {
+    className : 'jquery-auto-geocoder-map',
+    position  : 'after',
+    delay     : 500,
+    success   : {
       zoom : 14
     },
     initial  : {
