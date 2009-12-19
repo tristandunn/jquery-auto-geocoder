@@ -8,7 +8,8 @@ text field by a user.
 1. Include [jQuery](http://jquery.com).
 2. Include the Google Maps [JavaScript API Version 3](http://code.google.com/apis/maps/documentation/v3/).
 3. Include [the plug-in](http://github.com/tristandunn/jquery-auto-geocoder/raw/master/jquery.auto-geocoder.js).
-4. Call <code>autoGeocoder</code> on your location input(s).
+4. Set a width and height for the map using the class name, which is <code>jquery-auto-geocoder-map</code> by default.
+5. Call <code>autoGeocoder</code> on your location input(s).
 
 ## Example
 
