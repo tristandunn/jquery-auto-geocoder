@@ -17,19 +17,47 @@ h1 {
   letter-spacing: -2px;
 }
 
-label {
-  font-weight: bold;
-  display: block;
+p {
+  background: #222;
+  color: #FFF;
+  padding: 8px;
+  font: 12px/1.4 Monaco, "Courier New", Courier, Fixed;
+  white-space: pre;
+  clear: both;
+}
+
+div {
+  width: 288px;
+  float: left;
+}
+
+div.other {
+  float: right;
 }
 
 input {
-  width: 592px;
+  width: 284px;
   margin: 4px 0;
   padding: 4px;
 }
 
 .jquery-auto-geocoder-map {
-  width: 504px;
-  height: 300px;
-  border: 50px solid #EEE;
+  width: 296px;
+  height: 198px;
+}
+
+div.full {
+  width: auto;
+  float: none;
+}
+
+div.full input {
+  width: 592px;
+  margin: 4px 0;
+  padding: 4px;
+}
+
+div.full .jquery-auto-geocoder-map {
+  width: 604px;
+  height: 320px;
 }

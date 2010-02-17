@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+
+  <title>Advanced Example</title>
+
+  <style type="text/css">
+    @import url(css/reset.css);
+    @import url(css/screen.css);
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>jQuery Automatic Geocoder</h1>
+</header>
+
+<section>
+  <form>
+    <div>
+      <input type="text" id="location" value="Boston, MA" />
+    </div>
+    <div class="other">
+      <input type="text" id="other-location" value="Baton Rouge, LA" />
+    </div>
+  </form>
+
+  <div style="clear: both"><br /></div>
+
+  <p id="log"></p>
+</section>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="../jquery.auto-geocoder.js"></script>
+<script type="text/javascript">
+$.fn.autoGeocoder.base.initialize.unshift(function() {
+  this
+    .bind('auto-geocoder-initialize', function() {
+      log('Initialize.      (Global)         #' + $(this).attr('id'));
+    })
+    .bind('auto-geocoder-createMap', function() {
+      log('Create map.      (Global)         #' + $(this).attr('id'));
+    })
+    .bind('auto-geocoder-onKeyUp', function() {
+      log('Key up.          (Global)         #' + $(this).attr('id'));
+    })
+    .bind('auto-geocoder-onGeocodeResult', function() {
+      log('Geocode result.  (Global)         #' + $(this).attr('id'));
+    })
+    .bind('auto-geocoder-onGeocodeSuccess', function() {
+      log('Geocode success. (Global)         #' + $(this).attr('id'));
+    })
+    .bind('auto-geocoder-onGeocodeFailure', function() {
+      log('Geocode failure. (Global)         #' + $(this).attr('id'));
+    });
+});
+
+
+
+$(function() {
+  $('#location')
+    .bind('auto-geocoder-initialize', function() {
+      log('Initialize.      (Single Element) #location');
+    })
+    .bind('auto-geocoder-createMap', function() {
+      log('Create map.      (Single Element) #location');
+    })
+    .bind('auto-geocoder-onKeyUp', function() {
+      log('Key up.          (Single Element) #location');
+    })
+    .bind('auto-geocoder-onGeocodeResult', function() {
+      log('Geocode result.  (Single Element) #' + $(this).attr('id'));
+    })
+    .bind('auto-geocoder-onGeocodeSuccess', function() {
+      log('Geocode success. (Single Element) #' + $(this).attr('id'));
+    })
+    .bind('auto-geocoder-onGeocodeFailure', function() {
+      log('Geocode failure. (Single Element) #' + $(this).attr('id'));
+    })
+    .autoGeocoder();
+
+  $('#other-location').autoGeocoder();
+});
+
+
+
+function log(text) {
+  $('#log').prepend(text + '<br>');
+}
+</script>
+
+</body>
+</html>
