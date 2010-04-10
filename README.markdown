@@ -13,18 +13,17 @@ text field by a user.
 
 ## Example
 
-Basic example.
+    $(function() {
+      $('#location').autoGeocoder();
+    });
 
-<pre><code>$(function() {
-  $('#location').autoGeocoder();
-});
-</code></pre>
+See [examples](http://github.com/tristandunn/jquery-auto-geocoder/tree/master/examples/) for more.
 
 ## License
 
 The MIT License
 
-Copyright (c) 2009 Tristan Dunn
+Copyright (c) 2010 Tristan Dunn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
