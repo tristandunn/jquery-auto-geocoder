@@ -124,14 +124,14 @@
   // http://yehudakatz.com/2009/04/20/evented-programming-with-jquery/
   jQuery.fn.setupExtras = jQuery.fn.setupExtras || function(setup, options) {
     for (property in setup) {
-      var self = this;
-
       if (setup[property] instanceof Array) {
-        for (var i = 0; i < setup[property].length; i++) {
-          setup[property][i].call(self, options);
+        var length = setup[property].length;
+
+        for (var i = 0; i < length; i++) {
+          setup[property][i].call(this, options);
         }
       } else {
-        setup[property].call(self, options);
+        setup[property].call(this, options);
       }
     }
   };
