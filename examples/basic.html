@@ -5,23 +5,24 @@
 
   <title>Basic Example</title>
 
-  <style type="text/css">
-    @import url(css/reset.css);
-    @import url(css/screen.css);
-  </style>
+  <link href="css/reset.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/screen.css" media="screen" rel="stylesheet" type="text/css">
 </head>
 <body>
 
 <header>
   <h1>jQuery Automatic Geocoder</h1>
+  <p>Automatically geocode and display a location entered in a text field.</p>
 </header>
 
 <section>
-  <form>
-    <div class="full">
-      <input type="text" id="location" value="Boston, MA" />
-    </div>
-  </form>
+  <article>
+    <form>
+      <div class="full">
+        <input type="text" id="location" value="Boston, MA">
+      </div>
+    </form>
+  </article>
 </section>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>

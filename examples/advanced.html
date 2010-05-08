@@ -5,30 +5,31 @@
 
   <title>Advanced Example</title>
 
-  <style type="text/css">
-    @import url(css/reset.css);
-    @import url(css/screen.css);
-  </style>
+  <link href="css/reset.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/screen.css" media="screen" rel="stylesheet" type="text/css">
 </head>
 <body>
 
 <header>
   <h1>jQuery Automatic Geocoder</h1>
+  <p>Automatically geocode and display a location entered in a text field.</p>
 </header>
 
 <section>
-  <form>
-    <div>
-      <input type="text" id="location" value="Boston, MA" />
-    </div>
-    <div class="other">
-      <input type="text" id="other-location" value="Baton Rouge, LA" />
-    </div>
-  </form>
+  <article>
+    <form>
+      <div>
+        <input type="text" id="location" value="Boston, MA">
+      </div>
+      <div class="other">
+        <input type="text" id="other-location" value="Baton Rouge, LA">
+      </div>
+    </form>
+  </article>
 
-  <div style="clear: both"><br /></div>
-
-  <p id="log"></p>
+  <details>
+    <pre id="log"></pre>
+  </details>
 </section>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -58,7 +59,6 @@ $.fn.autoGeocoder.base.initialize.unshift(function() {
 });
 
 
-
 $(function() {
   $('#location')
     .bind('auto-geocoder-initialize', function() {
@@ -71,13 +71,13 @@ $(function() {
       log('Key up.          (Single Element) #location');
     })
     .bind('auto-geocoder-onGeocodeResult', function() {
-      log('Geocode result.  (Single Element) #' + $(this).attr('id'));
+      log('Geocode result.  (Single Element) #location');
     })
     .bind('auto-geocoder-onGeocodeSuccess', function() {
-      log('Geocode success. (Single Element) #' + $(this).attr('id'));
+      log('Geocode success. (Single Element) #location');
     })
     .bind('auto-geocoder-onGeocodeFailure', function() {
-      log('Geocode failure. (Single Element) #' + $(this).attr('id'));
+      log('Geocode failure. (Single Element) #location');
     })
     .autoGeocoder();
 
@@ -85,9 +85,12 @@ $(function() {
 });
 
 
-
 function log(text) {
-  $('#log').prepend(text + '<br>');
+  var element = $('#log');
+
+  element
+    .prepend(text + "\n")
+    .html(element.html().split("\n").slice(0, 11).join("\n"));
 }
 </script>
 
