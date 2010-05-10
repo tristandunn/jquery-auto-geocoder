@@ -20,8 +20,9 @@
       );
 
       this.bind('auto-geocoder-initialize', function() {
-        $(this).trigger('auto-geocoder-createMap');
-        $(this).trigger('auto-geocoder-onKeyUp');
+        $(this)
+          .trigger('auto-geocoder-createMap')
+          .trigger('auto-geocoder-onKeyUp');
       });
     }],
 
@@ -122,7 +123,7 @@
 
   // From:
   // http://yehudakatz.com/2009/04/20/evented-programming-with-jquery/
-  jQuery.fn.setupExtras = jQuery.fn.setupExtras || function(setup, options) {
+  $.fn.setupExtras = $.fn.setupExtras || function(setup, options) {
     for (property in setup) {
       if (setup[property] instanceof Array) {
         var length = setup[property].length;
