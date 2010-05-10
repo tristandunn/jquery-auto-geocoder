@@ -17,7 +17,7 @@ text field by a user.
       $('#location').autoGeocoder();
     });
 
-See [examples](http://github.com/tristandunn/jquery-auto-geocoder/tree/master/examples/) for more.
+See [examples](http://github.com/tristandunn/jquery-auto-geocoder/tree/master/examples/) for more or [view an example online](http://tristandunn.com/projects/jquery-auto-geocoder/).
 
 ## License
 
