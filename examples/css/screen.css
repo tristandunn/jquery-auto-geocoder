@@ -5,6 +5,19 @@ body {
   font: 18px/1 "Baskerville", Times, serif;
 }
 
+a {
+  background: transparent;
+  color: #222;
+  border-bottom: 1px solid #222;
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  color: #E3392D;
+  border-color: #E3392D;
+}
+
 header,
 section,
 article,
@@ -63,6 +76,10 @@ div.other {
 
 form {
   overflow: hidden;
+}
+
+form + p {
+  margin: 16px 0 0 0;
 }
 
 input {
