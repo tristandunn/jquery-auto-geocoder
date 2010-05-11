@@ -6,7 +6,7 @@
 
     this
       .setupExtras(options.setup || $.fn.autoGeocoder.base, options)
-      .trigger('auto-geocoder-initialize');
+      .trigger('auto-geocoder.initialize');
 
     return this;
   };
@@ -18,15 +18,15 @@
         options.initial.center[1]
       );
 
-      this.bind('auto-geocoder-initialize', function() {
+      this.bind('auto-geocoder.initialize', function() {
         $(this)
-          .trigger('auto-geocoder-createMap')
-          .trigger('auto-geocoder-onKeyUp');
+          .trigger('auto-geocoder.createMap')
+          .trigger('auto-geocoder.onKeyUp');
       });
     }],
 
     createMap: [function(options) {
-      this.bind('auto-geocoder-createMap', function() {
+      this.bind('auto-geocoder.createMap', function() {
         var element = $('<div class="' + options.className + '" />');
 
         if (options.position == 'before' || options.position == 'after') {
@@ -35,8 +35,8 @@
           $(options.position).append(element);
         }
 
-        $(this).keyup(function() {
-          $(this).trigger('auto-geocoder-onKeyUp');
+        $(this).bind('keyup.auto-geocoder', function() {
+          $(this).trigger('auto-geocoder.onKeyUp');
         });
 
         this.map = new google.maps.Map(element[0], options.initial);
@@ -44,7 +44,7 @@
     }],
 
     onKeyUp: [function(options) {
-      this.bind('auto-geocoder-onKeyUp', function() {
+      this.bind('auto-geocoder.onKeyUp', function() {
         var self    = this;
         var element = $(this);
         var address = $.trim(element.val()).replace(/\s+/g, ' ').toLowerCase();
@@ -59,7 +59,7 @@
         }
 
         if (address == '') {
-          element.trigger('auto-geocoder-onGeocodeResult', [[], '']);
+          element.trigger('auto-geocoder.onGeocodeResult', [[], '']);
 
           return;
         }
@@ -68,14 +68,14 @@
           self.previousAddress = address;
 
           geocoder.geocode({ address: address }, function(results, status) {
-            element.trigger('auto-geocoder-onGeocodeResult', [results, status]);
+            element.trigger('auto-geocoder.onGeocodeResult', [results, status]);
           });
         }, options.delay);
       });
     }],
 
     onGeocodeResult: [function(options) {
-      this.bind('auto-geocoder-onGeocodeResult', function(e, results, status) {
+      this.bind('auto-geocoder.onGeocodeResult', function(e, results, status) {
         if (status == google.maps.GeocoderStatus.OK &&
             status != google.maps.GeocoderStatus.ZERO_RESULTS) {
           this.map.setZoom(options.success.zoom);
@@ -85,7 +85,7 @@
           this.marker.setPosition(results[0].geometry.location);
           this.marker.setMap(this.map);
 
-          $(this).trigger('auto-geocoder-onGeocodeSuccess', [results, status]);
+          $(this).trigger('auto-geocoder.onGeocodeSuccess', [results, status]);
         } else {
           if (this.marker) {
             this.marker.setMap(null);
@@ -95,7 +95,7 @@
           this.map.setZoom(options.initial.zoom);
           this.map.setCenter(options.initial.center);
 
-          $(this).trigger('auto-geocoder-onGeocodeFailure', [results, status]);
+          $(this).trigger('auto-geocoder.onGeocodeFailure', [results, status]);
         }
       });
     }],

@@ -38,22 +38,22 @@
 <script type="text/javascript">
 $.fn.autoGeocoder.base.initialize.unshift(function() {
   this
-    .bind('auto-geocoder-initialize', function() {
+    .bind('auto-geocoder.initialize', function() {
       log('Initialize.      (Global)         #' + $(this).attr('id'));
     })
-    .bind('auto-geocoder-createMap', function() {
+    .bind('auto-geocoder.createMap', function() {
       log('Create map.      (Global)         #' + $(this).attr('id'));
     })
-    .bind('auto-geocoder-onKeyUp', function() {
+    .bind('auto-geocoder.onKeyUp', function() {
       log('Key up.          (Global)         #' + $(this).attr('id'));
     })
-    .bind('auto-geocoder-onGeocodeResult', function() {
+    .bind('auto-geocoder.onGeocodeResult', function() {
       log('Geocode result.  (Global)         #' + $(this).attr('id'));
     })
-    .bind('auto-geocoder-onGeocodeSuccess', function() {
+    .bind('auto-geocoder.onGeocodeSuccess', function() {
       log('Geocode success. (Global)         #' + $(this).attr('id'));
     })
-    .bind('auto-geocoder-onGeocodeFailure', function() {
+    .bind('auto-geocoder.onGeocodeFailure', function() {
       log('Geocode failure. (Global)         #' + $(this).attr('id'));
     });
 });
@@ -61,22 +61,22 @@ $.fn.autoGeocoder.base.initialize.unshift(function() {
 
 $(function() {
   $('#location')
-    .bind('auto-geocoder-initialize', function() {
+    .bind('auto-geocoder.initialize', function() {
       log('Initialize.      (Single Element) #location');
     })
-    .bind('auto-geocoder-createMap', function() {
+    .bind('auto-geocoder.createMap', function() {
       log('Create map.      (Single Element) #location');
     })
-    .bind('auto-geocoder-onKeyUp', function() {
+    .bind('auto-geocoder.onKeyUp', function() {
       log('Key up.          (Single Element) #location');
     })
-    .bind('auto-geocoder-onGeocodeResult', function() {
+    .bind('auto-geocoder.onGeocodeResult', function() {
       log('Geocode result.  (Single Element) #location');
     })
-    .bind('auto-geocoder-onGeocodeSuccess', function() {
+    .bind('auto-geocoder.onGeocodeSuccess', function() {
       log('Geocode success. (Single Element) #location');
     })
-    .bind('auto-geocoder-onGeocodeFailure', function() {
+    .bind('auto-geocoder.onGeocodeFailure', function() {
       log('Geocode failure. (Single Element) #location');
     })
     .autoGeocoder();
