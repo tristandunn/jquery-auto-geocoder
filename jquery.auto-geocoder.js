@@ -4,10 +4,9 @@
   $.fn.autoGeocoder = function(options) {
     options = $.extend(true, {}, $.fn.autoGeocoder.defaults, options || {});
 
-    this.setupExtras(options.setup || $.fn.autoGeocoder.base, options);
-    this.each(function() {
-      $(this).trigger('auto-geocoder-initialize');
-    });
+    this
+      .setupExtras(options.setup || $.fn.autoGeocoder.base, options)
+      .trigger('auto-geocoder-initialize');
 
     return this;
   };
@@ -135,5 +134,7 @@
         setup[property].call(this, options);
       }
     }
+
+    return this;
   };
 })(jQuery);
