@@ -78,8 +78,12 @@
       this.bind('auto-geocoder.onGeocodeResult', function(e, results, status) {
         if (status == google.maps.GeocoderStatus.OK &&
             status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-          this.map.setZoom(options.success.zoom);
-          this.map.setCenter(results[0].geometry.location);
+          if (options.success.zoom == 'auto') {
+            this.map.fitBounds(results[0].geometry.viewport);
+          } else {
+            this.map.setZoom(options.success.zoom);
+            this.map.setCenter(results[0].geometry.location);
+          }
 
           this.marker = this.marker || new google.maps.Marker();
           this.marker.setPosition(results[0].geometry.location);
@@ -109,7 +113,7 @@
     position  : 'after',
     delay     : 500,
     success   : {
-      zoom : 14
+      zoom : 'auto'
     },
     initial  : {
       zoom           : 1,
