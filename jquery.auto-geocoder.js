@@ -4,11 +4,8 @@
   $.fn.autoGeocoder = function(options) {
     options = $.extend(true, {}, $.fn.autoGeocoder.defaults, options || {});
 
-    this
-      .setupExtras(options.setup || $.fn.autoGeocoder.base, options)
-      .trigger('auto-geocoder.initialize');
-
-    return this;
+    return this.setupExtras(options.setup || $.fn.autoGeocoder.base, options)
+               .trigger('auto-geocoder.initialize');
   };
 
   $.fn.autoGeocoder.base = {
