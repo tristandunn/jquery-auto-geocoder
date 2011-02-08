@@ -2,18 +2,15 @@
   var geocoder = new google.maps.Geocoder();
 
   $.fn.autoGeocoder = function(options) {
-    var options = $.extend(true, {}, $.fn.autoGeocoder.defaults, options || {});
-    var setup   = options.setup || $.fn.autoGeocoder.base;
+    var autoGeocoder = $.fn.autoGeocoder;
+    var options      = $.extend(true, {}, autoGeocoder.defaults, options || {});
+    var setup        = options.setup || autoGeocoder.base;
 
     for (property in setup) {
-      if (setup[property] instanceof Array) {
-        var length = setup[property].length;
+      var length = setup[property].length;
 
-        for (var i = 0; i < length; i++) {
-          setup[property][i].call(this, options);
-        }
-      } else {
-        setup[property].call(this, options);
+      for (var i = 0; i < length; i++) {
+        setup[property][i].call(this, options);
       }
     }
 
@@ -22,10 +19,7 @@
 
   $.fn.autoGeocoder.base = {
     initialize: [function(options) {
-      options.initial.center = new google.maps.LatLng(
-        options.initial.center[0],
-        options.initial.center[1]
-      );
+      options.initial.center = google.maps.LatLng.call(this, options.initial.center);
 
       this.bind('auto-geocoder.initialize', function() {
         $(this)
@@ -55,7 +49,7 @@
     onKeyUp: [function(options) {
       this.bind('auto-geocoder.onKeyUp', function() {
         var self    = this;
-        var element = $(this);
+        var element = $(self);
         var address = $.trim(element.val()).replace(/\s+/g, ' ').toLowerCase();
 
         if (this.timeout) {
