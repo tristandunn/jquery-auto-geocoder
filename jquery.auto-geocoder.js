@@ -2,10 +2,22 @@
   var geocoder = new google.maps.Geocoder();
 
   $.fn.autoGeocoder = function(options) {
-    options = $.extend(true, {}, $.fn.autoGeocoder.defaults, options || {});
+    var options = $.extend(true, {}, $.fn.autoGeocoder.defaults, options || {});
+    var setup   = options.setup || $.fn.autoGeocoder.base;
 
-    return this.setupExtras(options.setup || $.fn.autoGeocoder.base, options)
-               .trigger('auto-geocoder.initialize');
+    for (property in setup) {
+      if (setup[property] instanceof Array) {
+        var length = setup[property].length;
+
+        for (var i = 0; i < length; i++) {
+          setup[property][i].call(this, options);
+        }
+      } else {
+        setup[property].call(this, options);
+      }
+    }
+
+    return this.trigger('auto-geocoder.initialize');
   };
 
   $.fn.autoGeocoder.base = {
@@ -24,7 +36,7 @@
 
     createMap: [function(options) {
       this.bind('auto-geocoder.createMap', function() {
-        var element = $('<div class="' + options.className + '" />');
+        var element = $('<div>', { 'class' : options.className });
 
         if (options.position == 'before' || options.position == 'after') {
           $(this)[options.position](element);
@@ -119,23 +131,5 @@
       mapTypeId      : google.maps.MapTypeId.ROADMAP,
       mapTypeControl : false
     }
-  };
-
-  // From:
-  // http://yehudakatz.com/2009/04/20/evented-programming-with-jquery/
-  $.fn.setupExtras = $.fn.setupExtras || function(setup, options) {
-    for (property in setup) {
-      if (setup[property] instanceof Array) {
-        var length = setup[property].length;
-
-        for (var i = 0; i < length; i++) {
-          setup[property][i].call(this, options);
-        }
-      } else {
-        setup[property].call(this, options);
-      }
-    }
-
-    return this;
   };
 })(jQuery);
