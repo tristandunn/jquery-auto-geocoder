@@ -78,6 +78,7 @@
     }],
 
     onGeocodeResult: [function(options) {
+      this.get(0).marker = new google.maps.Marker();
       this.bind('auto-geocoder.onGeocodeResult', function(e, results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           if (options.success.zoom == 'auto') {
@@ -87,7 +88,6 @@
             this.map.setCenter(results[0].geometry.location);
           }
 
-          this.marker = this.marker || new google.maps.Marker();
           this.marker.setPosition(results[0].geometry.location);
           this.marker.setMap(this.map);
 
@@ -95,7 +95,6 @@
         } else {
           if (this.marker) {
             this.marker.setMap(null);
-            delete this.marker;
           }
 
           this.map.setZoom(options.initial.zoom);
