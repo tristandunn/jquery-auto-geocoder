@@ -2,14 +2,12 @@
   var geocoder = new google.maps.Geocoder();
 
   $.fn.autoGeocoder = function(options) {
-    var autoGeocoder = $.fn.autoGeocoder;
-    var options      = $.extend(true, {}, autoGeocoder.defaults, options || {});
-    var setup        = options.setup || autoGeocoder.base;
+    var autoGeocoder = $.fn.autoGeocoder,
+        options      = $.extend(true, {}, autoGeocoder.defaults, options || {}),
+        setup        = options.setup || autoGeocoder.base;
 
     for (property in setup) {
-      var length = setup[property].length;
-
-      for (var i = 0; i < length; i++) {
+      for (var i = 0, length = setup[property].length; i < length; i++) {
         setup[property][i].call(this, options);
       }
     }
@@ -48,17 +46,18 @@
 
     onKeyUp: [function(options) {
       this.bind('auto-geocoder.onKeyUp', function() {
-        var self    = this;
-        var element = $(self);
-        var address = $.trim(element.val()).replace(/\s+/g, ' ').toLowerCase();
+        var self     = this,
+            element  = $(self),
+            address  = $.trim(element.val()).replace(/\s+/g, ' ').toLowerCase(),
+            timeout  = this.timeout,
+            previous = this.previousAddress;
 
-        if (this.timeout) {
-          clearTimeout(this.timeout);
+        if (timeout) {
+          clearTimeout(timeout);
         }
 
-        if (this.previousAddress &&
-            this.previousAddress == address) {
-            return;
+        if (previous && previous == address) {
+          return;
         }
 
         if (address == '') {
@@ -80,25 +79,28 @@
     onGeocodeResult: [function(options) {
       this.get(0).marker = new google.maps.Marker();
       this.bind('auto-geocoder.onGeocodeResult', function(e, results, status) {
+        var map    = this.map,
+            marker = this.marker;
+
         if (status == google.maps.GeocoderStatus.OK) {
           if (options.success.zoom == 'auto') {
-            this.map.fitBounds(results[0].geometry.viewport);
+            map.fitBounds(results[0].geometry.viewport);
           } else {
-            this.map.setZoom(options.success.zoom);
-            this.map.setCenter(results[0].geometry.location);
+            map.setZoom(options.success.zoom);
+            map.setCenter(results[0].geometry.location);
           }
 
-          this.marker.setPosition(results[0].geometry.location);
-          this.marker.setMap(this.map);
+          marker.setPosition(results[0].geometry.location);
+          marker.setMap(map);
 
           $(this).trigger('auto-geocoder.onGeocodeSuccess', [results, status]);
         } else {
-          if (this.marker) {
-            this.marker.setMap(null);
+          if (marker) {
+            marker.setMap(null);
           }
 
-          this.map.setZoom(options.initial.zoom);
-          this.map.setCenter(options.initial.center);
+          map.setZoom(options.initial.zoom);
+          map.setCenter(options.initial.center);
 
           $(this).trigger('auto-geocoder.onGeocodeFailure', [results, status]);
         }
