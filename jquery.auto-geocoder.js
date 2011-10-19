@@ -7,8 +7,10 @@
         setup        = options.setup || autoGeocoder.base;
 
     for (property in setup) {
-      for (var i = 0, length = setup[property].length; i < length; i++) {
-        setup[property][i].call(this, options);
+      var methods = setup[property];
+
+      for (var i = 0, length = methods.length; i < length; i++) {
+        methods[i].call(this, options);
       }
     }
 
@@ -28,12 +30,13 @@
 
     createMap: [function(options) {
       this.bind('auto-geocoder.createMap', function() {
-        var element = $('<div>', { 'class' : options.className });
+        var element  = $('<div>', { 'class' : options.className }),
+            position = options.position;
 
-        if (options.position == 'before' || options.position == 'after') {
-          $(this)[options.position](element);
+        if (position == 'before' || position == 'after') {
+          $(this)[position](element);
         } else {
-          $(options.position).append(element);
+          $(position).append(element);
         }
 
         $(this).bind('keyup.auto-geocoder', function() {
@@ -95,12 +98,14 @@
 
           $(this).trigger('auto-geocoder.onGeocodeSuccess', [results, status]);
         } else {
+          var initiali = options.initial;
+
           if (marker) {
             marker.setMap(null);
           }
 
-          map.setZoom(options.initial.zoom);
-          map.setCenter(options.initial.center);
+          map.setZoom(initial.zoom);
+          map.setCenter(initial.center);
 
           $(this).trigger('auto-geocoder.onGeocodeFailure', [results, status]);
         }
