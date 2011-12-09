@@ -86,14 +86,17 @@
             marker = this.marker;
 
         if (status == google.maps.GeocoderStatus.OK) {
+          var geometry = results[0].geometry,
+              position = geometry.location;
+
           if (options.success.zoom == 'auto') {
-            map.fitBounds(results[0].geometry.viewport);
+            map.fitBounds(geometry.viewport);
           } else {
             map.setZoom(options.success.zoom);
-            map.setCenter(results[0].geometry.location);
+            map.setCenter(position);
           }
 
-          marker.setPosition(results[0].geometry.location);
+          marker.setPosition(position);
           marker.setMap(map);
 
           $(this).trigger('auto-geocoder.onGeocodeSuccess', [results, status]);
