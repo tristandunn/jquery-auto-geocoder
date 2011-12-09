@@ -98,7 +98,7 @@
 
           $(this).trigger('auto-geocoder.onGeocodeSuccess', [results, status]);
         } else {
-          var initiali = options.initial;
+          var initial = options.initial;
 
           if (marker) {
             marker.setMap(null);
