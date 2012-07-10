@@ -21,7 +21,7 @@
     initialize: [function(options) {
       options.initial.center = google.maps.LatLng.call(this, options.initial.center);
 
-      this.bind('auto-geocoder.initialize', function() {
+      this.on('auto-geocoder.initialize', function() {
         $(this)
           .trigger('auto-geocoder.createMap')
           .trigger('auto-geocoder.onKeyUp');
@@ -29,18 +29,19 @@
     }],
 
     createMap: [function(options) {
-      this.bind('auto-geocoder.createMap', function() {
-        var element  = $('<div>', { 'class' : options.className }),
+      this.on('auto-geocoder.createMap', function() {
+        var self     = $(this),
+            element  = $('<div>', { 'class' : options.className }),
             position = options.position;
 
         if (position == 'before' || position == 'after') {
-          $(this)[position](element);
+          self[position](element);
         } else {
           $(position).append(element);
         }
 
-        $(this).bind('keyup.auto-geocoder', function() {
-          $(this).trigger('auto-geocoder.onKeyUp');
+        self.on('keyup.auto-geocoder', function() {
+          self.trigger('auto-geocoder.onKeyUp');
         });
 
         this.map = new google.maps.Map(element[0], options.initial);
@@ -48,7 +49,7 @@
     }],
 
     onKeyUp: [function(options) {
-      this.bind('auto-geocoder.onKeyUp', function() {
+      this.on('auto-geocoder.onKeyUp', function() {
         var self     = this,
             element  = $(self),
             address  = $.trim(element.val()).replace(/\s+/g, ' ').toLowerCase(),
@@ -81,7 +82,7 @@
 
     onGeocodeResult: [function(options) {
       this.get(0).marker = new google.maps.Marker();
-      this.bind('auto-geocoder.onGeocodeResult', function(e, results, status) {
+      this.on('auto-geocoder.onGeocodeResult', function(e, results, status) {
         var map    = this.map,
             marker = this.marker;
 
