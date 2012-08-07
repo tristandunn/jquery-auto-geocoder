@@ -19,7 +19,10 @@
 
   $.fn.autoGeocoder.base = {
     initialize: [function(options) {
-      options.initial.center = google.maps.LatLng.call(this, options.initial.center);
+      options.initial.center = new google.maps.LatLng(
+        options.initial.center[0],
+        options.initial.center[1]
+      );
 
       this.on('auto-geocoder.initialize', function() {
         $(this)
