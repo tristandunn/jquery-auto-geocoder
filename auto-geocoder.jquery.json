@@ -1,0 +1,28 @@
+{
+  "name"        : "auto-geocoder",
+  "version"     : "1.0.0",
+  "title"       : "jQuery Automatic Geocoder",
+  "description" : "Automatically geocode and display a location entered in a text field by a user.",
+  "keywords"    : ["geocode", "geocoder", "google", "location", "map", "maps"],
+  "bugs"        : "https://github.com/tristandunn/jquery-auto-geocoder/issues",
+  "demo"        : "http://tristandunn.com/projects/jquery-auto-geocoder/",
+  "docs"        : "https://github.com/tristandunn/jquery-auto-geocoder/blob/master/README.markdown",
+  "homepage"    : "https://github.com/tristandunn/jquery-auto-geocoder",
+
+  "author" : {
+    "name"  : "Tristan Dunn",
+    "email" : "hello@tristandunn.com",
+    "url"   : "http://tristandunn.com/"
+  },
+
+  "dependencies" : {
+    "jquery" : "1.8.2 - 1.9.0"
+  },
+
+  "licenses" : [
+    {
+      "type" : "MIT",
+      "url"  : "https://github.com/tristandunn/jquery-auto-geocoder/blob/master/LICENSE"
+    }
+  ]
+}
