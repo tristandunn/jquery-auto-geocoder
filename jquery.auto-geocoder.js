@@ -33,21 +33,21 @@
 
     createMap: [function(options) {
       this.on('auto-geocoder.createMap', function() {
-        var self     = $(this),
-            element  = $('<div>', { 'class' : options.className }),
+        var element  = $(this),
+            wrapper  = $('<div>', { 'class' : options.className }),
             position = options.position;
 
         if (position == 'before' || position == 'after') {
-          self[position](element);
+          element[position](wrapper);
         } else {
-          $(position).append(element);
+          $(position).append(wrapper);
         }
 
-        self.on('keyup.auto-geocoder', function() {
-          self.trigger('auto-geocoder.onKeyUp');
+        element.on('keyup.auto-geocoder', function() {
+          element.trigger('auto-geocoder.onKeyUp');
         });
 
-        this.map = new google.maps.Map(element[0], options.initial);
+        this.map = new google.maps.Map(wrapper[0], options.initial);
       });
     }],
 
