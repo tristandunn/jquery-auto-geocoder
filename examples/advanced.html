@@ -78,10 +78,9 @@ $(function() {
     })
     .on('auto-geocoder.onGeocodeFailure', function() {
       log('Geocode failure. (Single Element) #location');
-    })
-    .autoGeocoder();
+    });
 
-  $('#other-location').autoGeocoder();
+  $('#location, #other-location').autoGeocoder();
 });
 
 

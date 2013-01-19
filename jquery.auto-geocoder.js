@@ -84,10 +84,9 @@
     }],
 
     onGeocodeResult: [function(options) {
-      this.get(0).marker = new google.maps.Marker();
       this.on('auto-geocoder.onGeocodeResult', function(e, results, status) {
         var map    = this.map,
-            marker = this.marker;
+            marker = this.marker = this.marker || new google.maps.Marker();
 
         if (status == google.maps.GeocoderStatus.OK) {
           var geometry = results[0].geometry,
