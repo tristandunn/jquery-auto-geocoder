@@ -1,10 +1,9 @@
 (function($) {
   var geocoder = new google.maps.Geocoder();
 
-  $.fn.autoGeocoder = function(options) {
-    var autoGeocoder = $.fn.autoGeocoder,
-        options      = $.extend(true, {}, autoGeocoder.defaults, options || {}),
-        setup        = options.setup || autoGeocoder.base;
+  var autoGeocoder = $.fn.autoGeocoder = function(options) {
+    var options = $.extend(true, {}, autoGeocoder.defaults, options || {}),
+        setup   = options.setup || autoGeocoder.base;
 
     for (property in setup) {
       var methods = setup[property];
@@ -17,7 +16,7 @@
     return this.trigger('auto-geocoder.initialize');
   };
 
-  $.fn.autoGeocoder.base = {
+  autoGeocoder.base = {
     initialize: [function(options) {
       options.initial.center = new google.maps.LatLng(
         options.initial.center[0],
@@ -122,7 +121,7 @@
     onGeocodeFailure: []
   };
 
-  $.fn.autoGeocoder.defaults = {
+  autoGeocoder.defaults = {
     className : 'jquery-auto-geocoder-map',
     position  : 'after',
     delay     : 500,
