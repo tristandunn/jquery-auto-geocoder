@@ -1,6 +1,6 @@
 {
   "name"        : "auto-geocoder",
-  "version"     : "1.0.1",
+  "version"     : "1.0.2",
   "title"       : "jQuery Automatic Geocoder",
   "description" : "Automatically geocode and display a location entered in a text field by a user.",
   "keywords"    : ["geocode", "geocoder", "google", "location", "map", "maps"],
