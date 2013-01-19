@@ -1,4 +1,4 @@
-# jQuery Auto-geocoder
+# jQuery Automatic Geocoder
 
 A jQuery plug-in to automatically geocode and display a location entered in a
 text field by a user.
@@ -6,8 +6,8 @@ text field by a user.
 ## Usage
 
 1. Include [jQuery](http://jquery.com).
-2. Include the Google Maps [JavaScript API Version 3](http://code.google.com/apis/maps/documentation/v3/).
-3. Include [the plug-in](http://github.com/tristandunn/jquery-auto-geocoder/raw/master/jquery.auto-geocoder.js).
+2. Include the Google Maps [JavaScript API Version 3](https://developers.google.com/maps/documentation/javascript/).
+3. Include [the plug-in](https://github.com/tristandunn/jquery-auto-geocoder/raw/master/jquery.auto-geocoder.min.js).
 4. Set a width and height for the map using the class name, which is `jquery-auto-geocoder-map` by default.
 5. Call `autoGeocoder` on your location input(s).
 
@@ -19,7 +19,7 @@ $(function() {
 });
 ~~~
 
-See [examples](http://github.com/tristandunn/jquery-auto-geocoder/tree/master/examples/) for more or [view an example online](http://tristandunn.com/projects/jquery-auto-geocoder/).
+See [examples](https://github.com/tristandunn/jquery-auto-geocoder/tree/master/examples/) for more or [view an example online](http://tristandunn.com/projects/jquery-auto-geocoder/).
 
 ## Options
 
@@ -45,7 +45,7 @@ The initial options used to create the map. Accepts any options `google.maps.Map
 
 ## Credits
 
-* [Jan-Gerd Tenberge](http://janten.com/) for the `map.fitBounds(viewport)` tip.
+* [Jan-Gerd Tenberge](http://janten.com) for the `map.fitBounds(viewport)` tip.
 
 ## License
 
