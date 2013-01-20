@@ -129,11 +129,13 @@
       zoom : 'auto'
     },
     initial  : {
-      zoom           : 1,
-      center         : [34, 0],
-      draggable      : false,
-      mapTypeId      : google.maps.MapTypeId.ROADMAP,
-      mapTypeControl : false
+      zoom                   : 1,
+      center                 : [34, 0],
+      draggable              : false,
+      mapTypeId              : google.maps.MapTypeId.ROADMAP,
+      scrollwheel            : false,
+      disableDefaultUI       : true,
+      disableDoubleClickZoom : true
     }
   };
 })(jQuery);
