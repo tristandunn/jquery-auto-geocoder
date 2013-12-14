@@ -13,7 +13,7 @@
       }
     }
 
-    return this.trigger('auto-geocoder.initialize');
+    return this.trigger("auto-geocoder.initialize");
   };
 
   autoGeocoder.base = {
@@ -23,27 +23,27 @@
         options.initial.center[1]
       );
 
-      this.on('auto-geocoder.initialize', function() {
+      this.on("auto-geocoder.initialize", function() {
         $(this)
-          .trigger('auto-geocoder.createMap')
-          .trigger('auto-geocoder.onKeyUp');
+          .trigger("auto-geocoder.createMap")
+          .trigger("auto-geocoder.onKeyUp");
       });
     }],
 
     createMap: [function(options) {
-      this.on('auto-geocoder.createMap', function() {
+      this.on("auto-geocoder.createMap", function() {
         var element  = $(this),
-            wrapper  = $('<div>', { 'class' : options.className }),
+            wrapper  = $("<div>", { "class" : options.className }),
             position = options.position;
 
-        if (position == 'before' || position == 'after') {
+        if (position == "before" || position == "after") {
           element[position](wrapper);
         } else {
           $(position).append(wrapper);
         }
 
-        element.on('keyup.auto-geocoder', function() {
-          element.trigger('auto-geocoder.onKeyUp');
+        element.on("keyup.auto-geocoder", function() {
+          element.trigger("auto-geocoder.onKeyUp");
         });
 
         this.map = new google.maps.Map(wrapper[0], options.initial);
@@ -51,39 +51,36 @@
     }],
 
     onKeyUp: [function(options) {
-      this.on('auto-geocoder.onKeyUp', function() {
-        var self     = this,
-            element  = $(self),
-            address  = $.trim(element.val()).replace(/\s+/g, ' ').toLowerCase(),
+      this.on("auto-geocoder.onKeyUp", function() {
+        var element  = $(this),
+            address  = $.trim(element.val()).replace(/\s+/g, " ").toLowerCase(),
             timeout  = this.timeout,
             previous = this.previousAddress;
 
-        if (timeout) {
-          clearTimeout(timeout);
-        }
+        clearTimeout(timeout);
 
         if (previous && previous == address) {
           return;
         }
 
-        if (address == '') {
-          element.trigger('auto-geocoder.onGeocodeResult', [[], '']);
+        if (address == "") {
+          element.trigger("auto-geocoder.onGeocodeResult", [[], ""]);
 
           return;
         }
 
-        this.timeout = setTimeout(function() {
-          self.previousAddress = address;
+        this.timeout = setTimeout($.proxy(function() {
+          this.previousAddress = address;
 
           geocoder.geocode({ address: address }, function(results, status) {
-            element.trigger('auto-geocoder.onGeocodeResult', [results, status]);
+            element.trigger("auto-geocoder.onGeocodeResult", [results, status]);
           });
-        }, options.delay);
+        }, this), options.delay);
       });
     }],
 
     onGeocodeResult: [function(options) {
-      this.on('auto-geocoder.onGeocodeResult', function(e, results, status) {
+      this.on("auto-geocoder.onGeocodeResult", function(event, results, status) {
         var map    = this.map,
             marker = this.marker = this.marker || new google.maps.Marker();
 
@@ -91,7 +88,7 @@
           var geometry = results[0].geometry,
               position = geometry.location;
 
-          if (options.success.zoom == 'auto') {
+          if (options.success.zoom == "auto") {
             map.fitBounds(geometry.viewport);
           } else {
             map.setZoom(options.success.zoom);
@@ -101,7 +98,7 @@
           marker.setPosition(position);
           marker.setMap(map);
 
-          $(this).trigger('auto-geocoder.onGeocodeSuccess', [results, status]);
+          $(this).trigger("auto-geocoder.onGeocodeSuccess", [results, status]);
         } else {
           var initial = options.initial;
 
@@ -112,7 +109,7 @@
           map.setZoom(initial.zoom);
           map.setCenter(initial.center);
 
-          $(this).trigger('auto-geocoder.onGeocodeFailure', [results, status]);
+          $(this).trigger("auto-geocoder.onGeocodeFailure", [results, status]);
         }
       });
     }],
@@ -122,11 +119,11 @@
   };
 
   autoGeocoder.defaults = {
-    className : 'jquery-auto-geocoder-map',
-    position  : 'after',
+    className : "jquery-auto-geocoder-map",
+    position  : "after",
     delay     : 500,
     success   : {
-      zoom : 'auto'
+      zoom : "auto"
     },
     initial  : {
       zoom                   : 1,
