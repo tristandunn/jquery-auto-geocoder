@@ -19,7 +19,7 @@ $(function() {
 });
 ~~~
 
-See [examples](https://github.com/tristandunn/jquery-auto-geocoder/tree/master/examples/) for more or [view an example online](http://tristandunn.com/projects/jquery-auto-geocoder/).
+See [examples](https://github.com/tristandunn/jquery-auto-geocoder/tree/master/examples/) for more.
 
 ## Options
 

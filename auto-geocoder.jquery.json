@@ -5,7 +5,6 @@
   "description" : "Automatically geocode and display a location entered in a text field by a user using Google Maps.",
   "keywords"    : ["geocode", "geocoder", "google", "location", "map", "maps"],
   "bugs"        : "https://github.com/tristandunn/jquery-auto-geocoder/issues",
-  "demo"        : "http://tristandunn.com/projects/jquery-auto-geocoder/",
   "docs"        : "https://github.com/tristandunn/jquery-auto-geocoder/blob/master/README.markdown",
   "homepage"    : "https://github.com/tristandunn/jquery-auto-geocoder",
 
