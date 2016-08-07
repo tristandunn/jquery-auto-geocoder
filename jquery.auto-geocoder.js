@@ -5,7 +5,7 @@
     var options = $.extend(true, {}, autoGeocoder.defaults, options || {}),
         setup   = options.setup || autoGeocoder.base;
 
-    for (property in setup) {
+    for (var property in setup) {
       var methods = setup[property];
 
       for (var i = 0, length = methods.length; i < length; i++) {
@@ -36,7 +36,7 @@
             wrapper  = $("<div>", { "class" : options.className }),
             position = options.position;
 
-        if (position == "before" || position == "after") {
+        if (position === "before" || position === "after") {
           element[position](wrapper);
         } else {
           $(position).append(wrapper);
@@ -59,11 +59,11 @@
 
         clearTimeout(timeout);
 
-        if (previous && previous == address) {
+        if (previous && previous === address) {
           return;
         }
 
-        if (address == "") {
+        if (address === "") {
           element.trigger("auto-geocoder.onGeocodeResult", [[], ""]);
 
           return;
@@ -84,11 +84,11 @@
         var map    = this.map,
             marker = this.marker = this.marker || new google.maps.Marker();
 
-        if (status == google.maps.GeocoderStatus.OK) {
+        if (status === google.maps.GeocoderStatus.OK) {
           var geometry = results[0].geometry,
               position = geometry.location;
 
-          if (options.success.zoom == "auto") {
+          if (options.success.zoom === "auto") {
             map.fitBounds(geometry.viewport);
           } else {
             map.setZoom(options.success.zoom);
