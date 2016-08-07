@@ -45,7 +45,7 @@ The initial options used to create the map. Accepts any options `google.maps.Map
 
 ## Credits
 
-* [Jan-Gerd Tenberge](http://janten.com) for the `map.fitBounds(viewport)` tip.
+* [Jan-Gerd Tenberge](https://github.com/janten) for the `map.fitBounds(viewport)` tip.
 
 ## License
 
